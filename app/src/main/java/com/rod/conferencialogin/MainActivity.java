@@ -14,7 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.rod.conferencialogin.databinding.ActivityMainBinding;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,6 +64,28 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("MainActivity", "Datos registrados correctamente");
                 } catch (Exception e) {
                     Log.e("MainActivity", "Error al registrar datos", e);
+                }
+            }
+        });
+
+        btnMostrarD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    FileInputStream fis = openFileInput("datos_censo.txt");
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader br = new BufferedReader(isr);
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line).append("\n");
+                    }
+
+                    Log.d("MainActivity", "Datos leídos: " + sb.toString());
+                    br.close();
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Error al leer datos", e);
                 }
             }
         });
