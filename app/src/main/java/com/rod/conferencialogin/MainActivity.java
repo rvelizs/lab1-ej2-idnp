@@ -1,6 +1,7 @@
 package com.rod.conferencialogin;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.rod.conferencialogin.databinding.ActivityMainBinding;
+
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +42,29 @@ public class MainActivity extends AppCompatActivity {
         EditText edSangre = binding.edTxtGS;
         Button btnRegister = binding.btnRegistrar;
         Button btnMostrarD = binding.btnMostrarDatos;
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nombres = edNombres.getText().toString();
+                String apellidos = edApellidos.getText().toString();
+                String correo = edCorreo.getText().toString();
+                String celular = edCelular.getText().toString();
+                String sangre = edSangre.getText().toString();
+
+                String data = nombres + "," + apellidos + "," + correo + "," + celular + "," + sangre;
+
+                try {
+                    FileOutputStream fos = openFileOutput("datos_censo.txt", MODE_PRIVATE);
+                    fos.write(data.getBytes());
+                    fos.close();
+                    Log.d("MainActivity", "Datos registrados correctamente");
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Error al registrar datos", e);
+                }
+            }
+        });
+
 
     }
 }
