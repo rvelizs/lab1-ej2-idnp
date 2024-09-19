@@ -2,6 +2,8 @@ package com.rod.conferencialogin;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        EditText edNombres = binding.edTxtNombres;
+        EditText edApellidos = binding.edTxtApellidos;
+        EditText edCorreo = binding.edTxtCorreo;
+        EditText edCelular = binding.edTxtCelular;
+        EditText edSangre = binding.edTxtGS;
+        Button btnRegister = binding.btnRegistrar;
+        Button btnMostrarD = binding.btnMostrarDatos;
 
     }
 }
